@@ -9,13 +9,13 @@ import Animated, {
 import GlowImage from '../../../../assets/images/glow.png';
 
 interface props {
-  isOn: SharedValue<number>;
+  activeIndex: SharedValue<number>;
 }
 
-const LightComppont: FC<props> = ({isOn}) => {
+const LightComppont: FC<props> = ({activeIndex}) => {
   const animStyle = useAnimatedStyle(() => {
     return {
-      opacity: withTiming(isOn.value, {
+      opacity: withTiming(activeIndex.value, {
         duration: 800,
       }),
     };

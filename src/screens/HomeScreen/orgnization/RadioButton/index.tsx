@@ -2,6 +2,7 @@ import {View} from 'react-native';
 import React, {FC, useCallback} from 'react';
 import styles from './styles';
 import Animated, {
+  SharedValue,
   useAnimatedStyle,
   useSharedValue,
   withSpring,
@@ -11,20 +12,11 @@ import SingleRadioButton from '../../molecules/SingleRadioButton';
 
 interface props {
   titles: [string, string];
-  getActive: (index: number) => void;
+  activeIndex: SharedValue<number>;
+  changeSelection: (index: number) => void;
 }
 
-const RadioButton: FC<props> = ({titles, getActive}) => {
-  const activeIndex = useSharedValue(0);
-
-  const changeSelection = useCallback(
-    (index: number) => {
-      activeIndex.value = index;
-      getActive(index);
-    },
-    [activeIndex, getActive],
-  );
-
+const RadioButton: FC<props> = ({titles, changeSelection, activeIndex}) => {
   const btnanimStyle = useAnimatedStyle(() => {
     return {
       transform: [

@@ -6,18 +6,22 @@ import {useSharedValue} from 'react-native-reanimated';
 import LightComppont from './orgnization/lightCompont';
 
 const HomeScreen: FC = () => {
-  const isOn = useSharedValue(0);
-  const getActive = useCallback(
+  const activeIndex = useSharedValue(0);
+  const changeSelection = useCallback(
     (index: number) => {
-      isOn.value = index;
+      activeIndex.value = index;
     },
-    [isOn],
+    [activeIndex],
   );
 
   return (
     <View style={styles.container}>
-      <LightComppont isOn={isOn} />
-      <RadioButton titles={['OFF', 'ON']} getActive={getActive} />
+      <LightComppont activeIndex={activeIndex} />
+      <RadioButton
+        titles={['OFF', 'ON']}
+        changeSelection={changeSelection}
+        activeIndex={activeIndex}
+      />
     </View>
   );
 };
